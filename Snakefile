@@ -29,6 +29,22 @@ name_components = {x: split_fastq_path_into_name_components(x)
                    for x in fastq_files}
 all_samples = set(name_components[x][0] for x in name_components)
 
+# get the set of barcodes per sample
+sample_to_bc = {}
+for sample in all_samples:
+    sample_to_bc[sample] = set(name_components[x][1]
+        for x in name_components
+        if name_components[x][0] == sample)
+
+# get the set of lanes per sample
+sample_to_lane = {}
+for sample in all_samples:
+    sample_to_lane[sample] = set(name_components[x][2]
+        for x in name_components
+        if name_components[x][0] == sample)
+
+
+
 # generate a dict of sample-to-name
 with open(sample_key) as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
