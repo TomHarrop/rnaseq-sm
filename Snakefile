@@ -90,7 +90,7 @@ rule merge_per_sample:
     input:
         merge_wildcard_resolver
     output:
-        touch('output/merged/{sample_name}_{read}.fastq.gz')
+        touch(temp('output/merged/{sample_name}_{read}.fastq.gz'))
     shell:
         'echo "'
         'cat {input} '
