@@ -83,8 +83,10 @@ rule index_genome:
     shell:
         'echo '
         'STAR '
-        'genomeGenerate {input} '
-        '> {output}'
+        '--runMode genomeGenerate '
+        '--genomeFastaFiles {input} '
+        '--genomeDir {output} '
+        '"FIXME PARAMS"'
 
 rule merge_per_sample:
     input:
@@ -126,6 +128,8 @@ rule star:
         '--outSAMtype BAM SortedByCoordinate '
         '--twopassMode Basic '
         '--runThreadN 6 '
-        '--outFileNamePrefix {wildcards.sample_name}.'
+        '--outFileNamePrefix {wildcards.sample_name}. '
+        '"FIXME PARAMS"'
+
 
 
